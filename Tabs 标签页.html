@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>Upload 上传</title>
+    <meta charset="utf-8"/>
+    <script src="js/vue/vue.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="css/element-ui/index.css">
+    <!-- 引入组件库 -->
+    <script src="js/element-ui/index.js"></script>
+</head>
+<body>
+<div id="root">
+    <h1>{{text}}</h1>
+    <div>
+        <template>
+            <el-tabs v-model="activeName" @tab-click="handleClick">
+                <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+                <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+                <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+                <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+            </el-tabs>
+        </template>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    new Vue({
+        el: '#root',
+        data: {
+            text: "Hello World!",
+            activeName: 'second'
+        },
+        methods: {
+            handleClick(tab, event) {
+                console.log(tab._props.label);
+                console.log(tab._props.name);
+            }
+        }
+    })
+</script>
+</style>
