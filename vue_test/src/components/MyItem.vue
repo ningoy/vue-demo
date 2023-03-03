@@ -4,7 +4,7 @@
       <label>
         <input type="checkbox" :checked="todo.done" @change="checkItem(todo.id)">
         <span v-show="!todo.isEdit">{{ todo.title }}</span>
-        <input v-show="todo.isEdit" type="text" :value="todo.title" @blur="finishEdit(todo)">
+        <input v-show="todo.isEdit" type="text" v-model="editingTitle" @blur="finishEdit(todo)">
       </label>
       <button class="delete" @click="deleteItem(todo.id)">删除</button>
       <button class="edit" @click="editItem(todo)">编辑</button>
@@ -32,10 +32,11 @@ export default {
       }
     },
     editItem(todo) {
+      this.editingTitle = todo.title
       this.$set(todo, 'isEdit', true)
     },
     finishEdit(todo) {
-      console.log("11")
+      this.$bus.$emit('editTodo', todo.id, this.editingTitle)
       todo.isEdit = false
     }
   }

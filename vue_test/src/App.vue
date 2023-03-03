@@ -84,6 +84,18 @@ export default {
         localStorage.setItem("todos", JSON.stringify(value))
       }
     }
+  },
+  mounted() {
+    this.$bus.$on('editTodo', (id, newTitle) => {
+      this.todos.forEach(todo => {
+        if (todo.id === id) {
+          todo.title = newTitle
+        }
+      })
+    })
+  },
+  beforeDestroy() {
+    this.$bus.$off('editTodo')
   }
 }
 </script>
